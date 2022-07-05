@@ -1,0 +1,20 @@
+;
+; BIND data file for local loopback interface
+;
+$TTL	604800
+@	IN	SOA	prova.asa.br. root.prova.asa.br. (
+			      1		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+;
+@	IN	NS	ns1.prova.asa.br.
+
+@	IN	A	127.0.0.1
+@	IN	AAAA	::1
+
+ns1			A	PRIMARY
+ns2			A	SECONDARY
+s1			A	PRIMARY
+s2			A	PRIMARY

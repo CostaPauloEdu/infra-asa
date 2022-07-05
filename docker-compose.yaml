@@ -1,0 +1,36 @@
+version: '3'
+services:
+
+  dns:
+    build:
+      context: ./dns  
+    image: dns.prova.asa.br:latest
+    container_name: ns1.prova.asa.br
+    restart: unless-stopped
+    ports:
+    - "53:53/udp"
+    - "53:53/tcp"
+    volumes:
+      - ./dns/primary:/etc/bind
+  
+  nginx:
+    build:
+      context: ./nginx
+    container_name: s1.prova.asa.br
+    image: s1.prova.asa.br:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/data:/var/www/application
+
+  apache:
+    build:
+      context: ./apache
+    container_name: s2.prova.asa.br
+    image: s2.prova.asa.br:latest
+    ports:
+      - "8080:80"
+      - "8443:443"
+    volumes:
+      - ./apache/data:/var/www/html
