@@ -6,8 +6,8 @@ if [ $1 == "start" ];then
         exit
     else
         cd dns/primary
-        sed -i "s/PRIMARY/$1/" db.prova.asa.br
-        sed -i "s/PRIMARY/$1/" named.conf.default-zones
+        sed -i "s/PRIMARY/$2/" db.prova.asa.br
+        sed -i "s/PRIMARY/$2/" named.conf.default-zones
         sed -i "s/SECONDARY/127.0.0.1/" db.prova.asa.br
         sed -i "s/SECONDARY/127.0.0.1/" named.conf.default-zones
         docker-compose up -d --build
